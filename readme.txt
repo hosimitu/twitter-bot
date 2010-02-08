@@ -3,7 +3,8 @@ http://www.hosimitu.com/2009/08/2923-1332.php
 
 それぞれの機能の説明のために機能を小分けしています。
 使う時はbase.phpとかにコピペでまとめて貰えればと思います。
-質問等は上記のブログのコメントか、http://twitter.com/hosimitu　までどうぞ。
+質問等は上記のブログのコメントかtwitterでどうぞ。
+http://twitter.com/hosimitu
 回答できるかはわからないですが　:(；ﾞﾟ'ωﾟ'):
 
 パーミッションの一例
