@@ -1,23 +1,13 @@
 <?php
-$id = "twitterID";
-$pass = "twitterPASS";
+//twitteroauth.phpと設定ファイルを読み込む。パスはあなたが置いた適切な場所に変更してください
+require_once("twitteroauth.php");
+require_once("setting.php");
 
-//API接続オプション
-	$option = array(
-	             "http"=>array(
-	                            "method"=>"GET",
-	                            "header"=>"Authorization: Basic ". base64_encode($id. ":". $pass)
-	                          )
-	               );
+//OAuthオブジェクト生成
+	$to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
 
-//コンテクストリソース
-	$context = stream_context_create($option);
-
-//リクエストURL(このURLを色々変更すると色々なAPIが使える)
-	$url = "http://twitter.com/statuses/replies.xml?count=30";
-
-//結果
-	$result = file_get_contents($url, false, $context);
+//API呼び出し
+	$result = $to->OAuthRequest("http://api.twitter.com/1/statuses/mentions.xml", "GET", array("count"=>"30"));
 
 //扱いやすくする
 	$xml = simplexml_load_string($result);
