@@ -1,32 +1,22 @@
 <?php
-$id = "twitterID";
-$pass = "twitterPASS";
-
-//API接続オプション
-	$option = array(
-	             "http"=>array(
-	                            "method"=>"GET",
-	                            "header"=>"Authorization: Basic ". base64_encode($id. ":". $pass)
-	                          )
-	               );
-
-//コンテクストリソース
-	$context = stream_context_create($option);
-
-//リクエストURL
-	$url = "http://twitter.com/statuses/replies.xml?count=30";
-
-//結果
-	$result = file_get_contents($url, false, $context);
-
-//扱いやすくする
-	$xml = simplexml_load_string($result);
+//twitteroauth.phpと設定ファイルを読み込む。パスはあなたが置いた適切な場所に変更してください
+require_once("twitteroauth.php");
+require_once("setting.php");
 
 //status_numberの比較_start
 	$number = fopen("./number.txt", "r");
 	$hikaku = fgets($number);  // 読み込み
 	$num10 = $hikaku;
 	fclose($number);
+
+//OAuthオブジェクト生成
+	$to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+
+//API呼び出し
+	$result = $to->OAuthRequest("http://api.twitter.com/1/statuses/mentions.xml", "GET", array("count"=>"30"));
+
+//扱いやすくする
+	$xml = simplexml_load_string($result);
 
 //XMLからデータを取得しいじる
 	$nm = 0;										//この定数はステータスナンバーを一度だけ記述するためのカウント。
