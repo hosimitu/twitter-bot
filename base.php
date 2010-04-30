@@ -1,26 +1,14 @@
 <?php
-$id = "twitterID";
-$pass = "twitterPASS";
+//twitteroaAuth.phpと設定ファイルを読み込む。パスはあなたが置いた適切な場所に変更してください
+require_once("twitteroauth.php");
+require_once("setting.php");
 
-//function
-function tweet($message, $username, $password){
-    $context = stream_context_create(array( 
-        'http' => array( 
-        'method' => 'POST', 
-        'header' => sprintf("Authorization: Basic %s\r\n", base64_encode($username.':'.$password)). 
-            "Content-type: application/x-www-form-urlencoded\r\n", 
-        'content' => http_build_query(array('status' => $message)), 
-        'timeout' => 5, 
-        ), 
-    )); 
-    $ret = file_get_contents('http://twitter.com/statuses/update.xml', false, $context); 
+//OAuthオブジェクト生成
+$to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
 
-    return false !== $ret;
-} 
+//ここから投稿する文章制作
+$mes = "こんにちは！世界！";
 
-//post message
-$mes = "Hello!World!";
-
-//Post
-$toukou = tweet($mes, $id, $pass);
+//投稿
+$req = $to->OAuthRequest("https://twitter.com/statuses/update.xml","POST",array("status"=>$mes));
 ?>
