@@ -20,5 +20,5 @@ twitter本家で『Consumer Key』などを取得出来るようになりまし�
 『Consumer Key』の取得に関しては『http://www.hosimitu.com/2010/04/2920-1456.php』を参考にして貰えれば楽に出来ると思います。
 取得した値はsetting.phpに書き加えてください。
 
-This uses "abraham's twitteroauth at master".
+This uses "abraham's twitteroauth at master 0.2.0-beta3".
 URL: http://github.com/abraham/twitteroauth
