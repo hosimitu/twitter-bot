@@ -1,6 +1,6 @@
 <?php
 //twitteroaAuth.phpと設定ファイルを読み込む。パスはあなたが置いた適切な場所に変更してください
-require_once("twitteroauth.php");
+require_once('twitteroauth/twitteroauth.php');
 require_once("setting.php");
 
 //OAuthオブジェクト生成
